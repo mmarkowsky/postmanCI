@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "b02362e6-51e0-4a5b-9f1e-02186de93e09",
+		"name": "Estrutura_Exemplo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "historia_XXX",
+			"item": [
+				{
+					"name": "nome_cenario",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// const _dummy = setInterval(() => { }, 300000); ",
+									"",
+									"// function sendRequest(req) { ",
+									"//     return new Promise((resolve, reject) => { ",
+									"//         pm.sendRequest(req, (err, res) => { ",
+									"//             if (err) {return reject(err);} ",
+									"//             return resolve(res);})});} ",
+									"            ",
+									"",
+									"// (async function main() { ",
+									"    ",
+									"//     //Termos - Obter ",
+									"//     const reqObterTermos = eval(`${pm.environment.get('fncObterTermos')}`)() ",
+									"//     const resObterTermos = await sendRequest(reqObterTermos); ",
+									"//     const jsonObterTermos = resObterTermos.json(); termosAssinados = [] ",
+									"//     j = 0 ",
+									"//     for (var i = 0; i < jsonObterTermos.data.length; i++) { ",
+									"//         if(jsonObterTermos.data[i].situacao_termo == \"S\"){ termosAssinados[j] = {",
+									"//             \"termo\":jsonObterTermos.data[i].tipo_termo} ",
+									"//             j += 1 ",
+									"//         } ",
+									"//     } ",
+									"//     //Termos - Limpar ",
+									"//     for (var i = 0; i < termosAssinados.length; i++) { ",
+									"//         const reqExcluirTermos = eval(`${pm.environment.get('fncAssinarTermos')}`)(\"apagar\",termosAssinados[i].termo) ",
+									"//         await sendRequest(reqExcluirTermos);",
+									"//     } ",
+									"",
+									"//     //Termos - Assinar ",
+									"//     const reqAssinarTermos = eval(`${pm.environment.get('fncAssinarTermos')}`)(\"assinar\",\"TIQ\") ",
+									"//     await sendRequest(reqAssinarTermos); ",
+									"    ",
+									"//     //Carteira Modelo ",
+									"//     const reqObterCarteiraModelo = eval(`${pm.environment.get('fncObterCarteiraModelo')}`)(`${pm.variables.get(\"perfil\")}`, `${pm.variables.get(\"segmento\")}`, \"PATRIMONIO\", true, false) ",
+									"//     const resObterCarteiraModelo = await sendRequest(reqObterCarteiraModelo); ",
+									"//     const jsonObterCarteiraModelo = resObterCarteiraModelo.json(); ",
+									"    ",
+									"//     //Otimizador ",
+									"//     const reqOtimizadorCore = eval(`${pm.environment.get('fncOtimizadorCore')}`)(`${pm.variables.get(\"valorInvestimento\")}`, null, `${pm.variables.get(\"perfil\")}`, `${pm.variables.get(\"segmento\")}`, null, \"S\", JSON.stringify(jsonObterCarteiraModelo.data.carteira_modelo[0])) ",
+									"//     const resOtimizadorCore = await sendRequest(reqOtimizadorCore); ",
+									"//     const jsonOtimizadorCore = resOtimizadorCore.json(); ",
+									"//     pm.environment.set(\"recomendacao\", JSON.stringify(jsonOtimizadorCore)); ",
+									"    ",
+									"//     clearInterval(_dummy)",
+									"",
+									"// })();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"Validar Resposta\", () => { ",
+									"//     pm.response.to.have.status(201); ",
+									"//     const primeiraResposta = JSON.parse(pm.environment.get('recomendacao')); ",
+									"//     const segundaResposta = pm.response.json(); pm.expect(segundaResposta.data.recomendacoes[0].tipo_recomendacao).to.eql(\"PATRIMONIO\"); ",
+									"//     if(`${pm.environment.get('termos')}`==\"true\"){ ",
+									"//         pm.expect(segundaResposta.data.informacoes_investidor.investidor_qualificado).to.eql(true); ",
+									"//         }",
+									"//         else{ ",
+									"//             pm.expect(segundaResposta.data.informacoes_investidor.investidor_qualificado).to.eql(false); ",
+									"//         } ",
+									"//     const isEqual = _.isEqual(primeiraResposta, segundaResposta.data.recomendacoes[0].produtos_fundamentados); ",
+									"//     pm.expect(isEqual).to.be.true; ",
+									"",
+									"// })"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_base}}/comments?postId=2",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"foos\",\n    \"body\": \"bar\",\n    \"userId\": 18\n}"
+						},
+						"url": {
+							"raw": "{{url_base}}/posts",
+							"host": [
+								"{{url_base}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// const postTokenSTS = {",
+					"//   url: `${pm.environment.get('base_url_token')",
+					"//     }`,",
+					"//   method: 'POST',",
+					"//   header: 'Content-Type:application/x-www-form-urlencoded',",
+					"//   body: {",
+					"//             mode: 'urlencoded',",
+					"//             urlencoded: [",
+					"//             { key: \"client_id\", value: `${pm.environment.get('client_id')}`",
+					"//             },",
+					"//             { key: \"client_secret\", value: `${pm.environment.get('client_secret')}`",
+					"//             },",
+					"//             { key: \"grant_type\", value: `${pm.environment.get('grant_type')}`",
+					"//             },",
+					"//         ]",
+					"//     }",
+					"// };",
+					"",
+					"",
+					"",
+					"// //Functions",
+					"// //pm.environment.set(\"fncProdutoSuitability\",fncProdutoSuitability.toString());",
+					"// //const reqProdutoSuitability = eval(`${pm.environment.get('funcao')}`)(parametros)",
+					"// //const resProdutoSuitability = await sendRequest(reqProdutoSuitability);",
+					"// //const jsonProdutoSuitability = resProdutoSuitability.json();",
+					"",
+					"// var fncObterCarteiraModelo = (perfil,segmento,tipos_recomendacao,investidor,funcionario) => {",
+					"//     var urlCarteira = `${pm.environment.get('base_url')}` + '/assessoriainvest-aws/v1/carteiras_modelo?ids_segmento='+segmento+'&ids_perfil='+perfil+'&tipos_recomendacao='+tipos_recomendacao+'&investidor_qualificado='+investidor+'&funcionario='+funcionario;",
+					"",
+					"//     const getCarteiraModelo = {",
+					"//         url: urlCarteira,",
+					"//         method: 'GET',",
+					"//         header: {'Authorization': 'Bearer '+ `${pm.environment.get('token')}`,",
+					"//                 'x-itau-correlationID': \"1\",",
+					"//                 'x-itau-apikey': `${pm.environment.get('x-itau-apikey')}`,",
+					"//                 'x-apigw-api-id': `${pm.environment.get('x-apigw-api-id_2')}`,",
+					"//                 'Content-Type': 'application/json'",
+					"//         }",
+					"//     }",
+					"//     return getCarteiraModelo;",
+					"// }",
+					"",
+					"// const _dummy = setInterval(() => {},",
+					"//     300000);",
+					"",
+					"// function sendRequest(req) {",
+					"//     return new Promise((resolve, reject) => {",
+					"//         pm.sendRequest(req, (err, res) => {",
+					"//             if (err) {",
+					"//                 return reject(err);",
+					"//                 }",
+					"//             return resolve(res);",
+					"//         })",
+					"//     });",
+					"// }",
+					"",
+					"",
+					"// (async function main() {",
+					"//     //console.log('Request Token Massa')",
+					"//     //const resTokenMassa = await sendRequest(postTokenMassa);",
+					"//     //var jsonTokenMassa = resTokenMassa.json();",
+					"//     //pm.environment.set(\"token_massa\",jsonTokenMassa.token_type + \" \" + jsonTokenMassa.access_token);",
+					"",
+					"//     //Funções",
+					"//     //pm.environment.set(\"fncObterCarteiraModelo\",fncObterCarteiraModelo.toString());",
+					"",
+					"//     //Bodys",
+					"//     //pm.environment.set(\"carteiraModelo\",JSON.stringify(carteiraModelo));",
+					"",
+					"//     clearInterval(_dummy)",
+					"// })();"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
