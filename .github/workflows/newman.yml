@@ -28,13 +28,13 @@ jobs:
 
       # Make directory to upload the test results
       - name: Make Directory for results
-        run: mkdir -p ./report
+        run: mkdir -p report
 
 
       # Run the POSTMAN collection
       - name: Run POSTMAN collection
         run: |
-          newman run ./Estrutura_Exemplo.postman_collection.json -e ./Dev_QA.postman_environment.json -r htmlextra --reporter-htmlextra-export report/htmlreport.html --reporter-htmlextra-darkTheme  > report.html
+          newman run ./Estrutura_Exemplo.postman_collection.json -e ./Dev_QA.postman_environment.json -r htmlextra --reporter-htmlextra-export htmlreport.html --reporter-htmlextra-darkTheme
 
 
       # Upload the contents of Test Results directory to workspace
@@ -42,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Reports
-          path: ./report
+          path: report
