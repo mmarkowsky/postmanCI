@@ -34,7 +34,7 @@ jobs:
       # Run the POSTMAN collection
       - name: Run POSTMAN collection
         run: |
-          newman run ./Estrutura_Exemplo.postman_collection.json -e ./Dev_QA.postman_environment.json -r htmlextra --reporter-htmlextra-export htmlreport.html --reporter-htmlextra-darkTheme
+          newman run ./Estrutura_Exemplo.postman_collection.json -e ./Dev_QA.postman_environment.json -r htmlextra --reporter-htmlextra-export report/htmlreport.html --reporter-htmlextra-darkTheme
 
 
       # Upload the contents of Test Results directory to workspace
