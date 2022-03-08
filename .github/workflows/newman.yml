@@ -11,4 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Run API Tests
-        run: newman run ./Estrutura_Exemplo.postman_collection.json -e ./Dev_QA.postman_environment.json -r ./report.html
+        run: newman run ./Estrutura_Exemplo.postman_collection.json -e ./Dev_QA.postman_environment.json -r --reporters html --reporter-html-export ./report.html
